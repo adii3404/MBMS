@@ -1,0 +1,72 @@
+import React from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+
+const Layout = ({ children }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get user from local storage
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  // Logout function
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
+  // Helper to check active link for styling
+  const isActive = (path) => location.pathname === path ? 'active' : '';
+
+  return (
+    <div className="container">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <h2>MediCare</h2>
+        <nav>
+          {/* Admin Links */}
+          {user && user.role === 'admin' && (
+            <Link to="/admin-dashboard" className={isActive('/admin-dashboard')}>
+              Admin Dashboard
+            </Link>
+          )}
+
+          {/* Staff Links */}
+          {user && user.role === 'staff' && (
+            <Link to="/staff-dashboard" className={isActive('/staff-dashboard')}>
+              Staff Dashboard
+            </Link>
+          )}
+
+          {/* Common Links */}
+          <Link to="/profile" className={isActive('/profile')}>
+            My Profile
+          </Link>
+          <Link to="/change-password" className={isActive('/change-password')}>
+            Change Password
+          </Link>
+        </nav>
+      </aside>
+
+      {/* Main Content Area */}
+      <div className="main-content">
+        {/* Header */}
+        <header className="header">
+          <h3>Billing System</h3>
+          <div className="user-info">
+            <span className="user-email">{user ? user.email : 'Guest'}</span>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        </header>
+
+        {/* Page Content */}
+        <div className="dashboard-content">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Layout;
