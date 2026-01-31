@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Import Pages
-import Login from './pages/Login.jsx';
-import AdminDashboard from './pages/AdminDashboard.jsx';
-import StaffDashboard from './pages/StaffDashboard.jsx';
-import Profile from './pages/Profile.jsx';
-import ChangePassword from './pages/ChangePassword.jsx';
-
+import Login from './Pages/Login.jsx';
+import AdminDashboard from './Pages/AdminDashboard.jsx';
+import StaffDashboard from './Pages/StaffDashboard.jsx';
+import Profile from './Pages/Profile.jsx';
+import ChangePassword from './Pages/ChangePassword.jsx';
+import BillingDashbord from './Pages/BillingDashboard.jsx';
 // Component to protect routes (checks if user is logged in)
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem('user');
@@ -34,12 +34,26 @@ function App() {
           </ProtectedRoute>
         } />
 
+         {/* Protected Routes */}
+        <Route path="/admin-dashboard" element={
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
+        } />
+
+         {/* Protected Routes */}
+        <Route path="/billing-dashboard" element={
+          <ProtectedRoute>
+            <BillingDashbord />
+          </ProtectedRoute>
+        } />
+
         <Route path="/staff-dashboard" element={
           <ProtectedRoute>
             <StaffDashboard />
           </ProtectedRoute>
         } />
-
+      
         <Route path="/profile" element={
           <ProtectedRoute>
             <Profile />
