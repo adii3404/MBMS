@@ -43,6 +43,12 @@ const Layout = ({ children }) => {
             </Link>
           )}
 
+          {user && user.role === 'staff' && (
+            <Link to="/billing-dashboard" className={isActive('/billing-dashboard')}>
+              Billing Dashboard
+            </Link>
+          )}
+
           {/* Common Links */}
           <Link to="/profile" className={isActive('/profile')}>
             My Profile
