@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
             </Link>
           )}
           {/* Admin Links */}
-          {user && user.role === 'billing' && (
+          {user && user.role === 'admin' && (
             <Link to="/billing-dashboard" className={isActive('/billing-dashboard')}>
               Billing Dashboard
             </Link>

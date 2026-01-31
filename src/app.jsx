@@ -7,7 +7,7 @@ import AdminDashboard from './Pages/AdminDashboard.jsx';
 import StaffDashboard from './Pages/StaffDashboard.jsx';
 import Profile from './Pages/Profile.jsx';
 import ChangePassword from './Pages/ChangePassword.jsx';
-import BillingDashbord from './Pages/BillingDashboard.jsx';
+import BillingDashboard from './Pages/BillingDashboard.jsx';
 // Component to protect routes (checks if user is logged in)
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem('user');
@@ -44,7 +44,7 @@ function App() {
          {/* Protected Routes */}
         <Route path="/billing-dashboard" element={
           <ProtectedRoute>
-            <BillingDashbord />
+            <BillingDashboard />
           </ProtectedRoute>
         } />
 
