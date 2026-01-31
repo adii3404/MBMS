@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Layout from '../Components/Layout.jsx';
 function BillingDashboard() {
   return (
-    <div>BillingDashboard</div>
+    <Layout>
+      <div>BillingDashboard</div>
+    </Layout>
   )
 }
 
