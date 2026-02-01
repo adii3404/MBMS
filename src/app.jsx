@@ -9,6 +9,11 @@ import Profile from './Pages/Profile.jsx';
 import ChangePassword from './Pages/ChangePassword.jsx';
 import BillingDashboard from './Pages/BillingDashboard.jsx';
 import Medicines from './Pages/Medicines.jsx';
+import Dealers from './Pages/Dealers.jsx';
+import Purchase from './Pages/Purchases.jsx';
+import Reports from './Pages/Reports.jsx';
+import Customers from './Pages/Customers.jsx';
+import Settings from './Pages/Settings.jsx';
 // Component to protect routes (checks if user is logged in)
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem('user');
@@ -72,6 +77,43 @@ function App() {
             <ChangePassword />
           </ProtectedRoute>
         } />
+
+        <Route path="/dealers" element={
+          <ProtectedRoute>
+            <Dealers />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/medicines" element={
+          <ProtectedRoute>
+            <Medicines />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/purchase" element={
+          <ProtectedRoute>
+            <Purchase />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/reports" element={
+          <ProtectedRoute>
+            <Reports />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/customers" element={
+          <ProtectedRoute>
+            <Customers />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/settings" element={
+          <ProtectedRoute>
+            <Settings />
+          </ProtectedRoute>
+        } />
+
       </Routes>
     </Router>
   );

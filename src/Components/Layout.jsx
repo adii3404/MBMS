@@ -55,6 +55,36 @@ const Layout = ({ children }) => {
             </Link>
           )}
 
+          {user && user.role === 'admin' && (
+            <Link to="/customers" className={isActive('/customers')}>
+              Customers
+            </Link>
+          )}
+
+          {user && user.role === 'admin' && (
+            <Link to="/purchase" className={isActive('/purchase')}>
+              Purchase
+            </Link>
+          )}
+
+          {user && user.role === 'admin' && (
+            <Link to="/reports" className={isActive('/reports')}>
+              Reports
+            </Link>
+          )}
+
+          {user && user.role === 'admin' && (
+            <Link to="/dealers" className={isActive('/dealers')}>
+              Dealers
+            </Link>
+          )}
+
+          {user && user.role === 'admin' && (
+            <Link to="/settings" className={isActive('/settings')}>
+              Settings
+            </Link>
+          )}
+
           {/* Common Links */}
           <Link to="/profile" className={isActive('/profile')}>
             My Profile
