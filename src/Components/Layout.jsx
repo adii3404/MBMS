@@ -49,6 +49,12 @@ const Layout = ({ children }) => {
             </Link>
           )}
 
+          {user && user.role === 'admin' && (
+            <Link to="/medicines" className={isActive('/medicines')}>
+              Medicines
+            </Link>
+          )}
+
           {/* Common Links */}
           <Link to="/profile" className={isActive('/profile')}>
             My Profile
@@ -63,7 +69,7 @@ const Layout = ({ children }) => {
       <div className="main-content">
         {/* Header */}
         <header className="header">
-          <h3>Billing System</h3>
+          <h3>MEDICARE</h3>
           <div className="user-info">
             <span className="user-email">{user ? user.email : 'Guest'}</span>
             <button className="btn btn-danger" onClick={handleLogout}>

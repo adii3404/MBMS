@@ -114,11 +114,12 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  
 }
 
 /* --- HEADER --- */
 .header {
-  background-color: white;
+  background-color: #bee425;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
@@ -205,4 +206,100 @@ th {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+/* Page wrapper */
+.medicine-page {
+  padding: 20px;
+}
+
+/* Page title */
+.medicine-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Form section */
+.medicine-form {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Inputs */
+.medicine-input {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  width: 180px;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-add {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-update {
+  background-color: #16a34a;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #64748b;
+  color: white;
+}
+
+.btn-clear {
+  background-color: #dc2626;
+  color: white;
+}
+
+/* Table */
+.medicine-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.medicine-table th,
+.medicine-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.medicine-table th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+}
+
+/* Action buttons */
+.btn-edit {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #ef4444;
+  color: white;
+  margin-left: 8px;
+}
+
+/* Empty state */
+.empty-row {
+  text-align: center;
+  color: #64748b;
+  padding: 15px;
 }
