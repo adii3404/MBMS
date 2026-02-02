@@ -1,68 +1,96 @@
-import React from 'react';
+import React from "react";
 import Layout from '../Components/Layout.jsx';
 
-const AdminDashboard = () => {
-  // Mock Data
-  const recentSales = [
-    { id: 1, med: 'Paracetamol', qty: 20, total: '₹100', date: '2023-10-01' },
-    { id: 2, med: 'Amoxicillin', qty: 5, total: '₹250', date: '2023-10-02' },
-    { id: 3, med: 'Cough Syrup', qty: 10, total: '₹500', date: '2023-10-03' },
-    { id: 4, med: 'Vitamin C', qty: 50, total: '₹200', date: '2023-10-03' },
-  ];
+function AdminDashboard() {
+  // Read data from LocalStorage safely
+  const medicines = JSON.parse(localStorage.getItem("medicines")) || [];
+  const sales = JSON.parse(localStorage.getItem("sales")) || [];
+  const purchases = JSON.parse(localStorage.getItem("purchases")) || [];
+
+  // Calculations
+  const totalMedicines = medicines.length;
+
+  const totalSales = sales.reduce(
+    (sum, sale) => sum + (sale.total || 0),
+    0
+  );
+
+  const totalPurchases = purchases.reduce(
+    (sum, purchase) => sum + (purchase.total || 0),
+    0
+  );
+
+  const lowStockMedicines = medicines.filter(
+    (m) => m.stock !== undefined && m.stock < 10
+  );
+
+  const recentSales = [...sales]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 5);
 
   return (
     <Layout>
-      <h2>Admin Dashboard</h2>
-      <p style={{marginBottom: '20px', color: '#666'}}>Overview of the pharmacy performance.</p>
+      <div className="dashboard-page">
+        <h2>Admin Dashboard</h2>
 
-      {/* Stats Cards */}
-      <div className="stats-grid">
-        <div className="stat-card">
-          <h3>Total Medicines</h3>
-          <p>1,240</p>
-        </div>
-        <div className="stat-card">
-          <h3>Total Sales</h3>
-          <p>₹ 45,200</p>
-        </div>
-        <div className="stat-card">
-          <h3>Total Purchases</h3>
-          <p>₹ 30,000</p>
-        </div>
-        <div className="stat-card" style={{borderLeftColor: '#dc3545'}}>
-          <h3>Low Stock Items</h3>
-          <p style={{color: '#dc3545'}}>12</p>
-        </div>
-      </div>
+        {/* TOP SUMMARY CARDS */}
+        <div className="dashboard-cards">
+          <div className="card">
+            <h4>Total Medicines</h4>
+            <p>{totalMedicines}</p>
+          </div>
 
-      {/* Recent Sales Table */}
-      <div className="card">
-        <h3>Recent Sales Transactions</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Medicine Name</th>
-              <th>Quantity</th>
-              <th>Total Amount</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentSales.map((sale) => (
-              <tr key={sale.id}>
-                <td>#{sale.id}</td>
-                <td>{sale.med}</td>
-                <td>{sale.qty}</td>
-                <td>{sale.total}</td>
-                <td>{sale.date}</td>
+          <div className="card">
+            <h4>Total Sales (₹)</h4>
+            <p>₹ {totalSales}</p>
+          </div>
+
+          <div className="card">
+            <h4>Total Purchases (₹)</h4>
+            <p>₹ {totalPurchases}</p>
+          </div>
+
+          <div className="card warning">
+            <h4>Low Stock Medicines</h4>
+            <p>{lowStockMedicines.length}</p>
+          </div>
+        </div>
+
+        {/* RECENT SALES */}
+        <div className="dashboard-section">
+          <h3>Recent Sales</h3>
+
+          <table className="dashboard-table">
+            <thead>
+              <tr>
+                <th>Invoice No</th>
+                <th>Date</th>
+                <th>Total (₹)</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {recentSales.length === 0 ? (
+                <tr>
+                  <td colSpan="3" style={{ textAlign: "center" }}>
+                    No sales found
+                  </td>
+                </tr>
+              ) : (
+                recentSales.map((sale) => (
+                  <tr key={sale.id}>
+                    <td>{sale.invoiceNo}</td>
+                    <td>{sale.date}</td>
+                    <td>₹ {sale.total}</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Layout>
   );
-};
+}
 
 export default AdminDashboard;
