@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
 import Layout from '../Components/Layout.jsx';
-function BillingDashboard() {
+
+const BillingDashboard = () => {
   return (
     <Layout>
-      <div>BillingDashboard</div>
+      <div style={{ padding: '20px' }}>
+        <h2>Billing Dashboard</h2>
+        <p>Select an option from the sidebar</p>
+      </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default BillingDashboard
+export default BillingDashboard;
