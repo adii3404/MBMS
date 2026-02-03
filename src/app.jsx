@@ -14,6 +14,8 @@ import Purchase from './Pages/Purchases.jsx';
 import Reports from './Pages/Reports.jsx';
 import Customers from './Pages/Customers.jsx';
 import Settings from './Pages/Settings.jsx';
+import NewSales from './Pages/NewSales.jsx';
+import SalesHistory from './Pages/SalesHistory.jsx';
 // Component to protect routes (checks if user is logged in)
 const ProtectedRoute = ({ children }) => {
   const user = localStorage.getItem('user');
@@ -29,7 +31,7 @@ function App() {
       <Routes>
         {/* Public Route */}
         <Route path="/login" element={<Login />} />
-        
+
         {/* Default redirect to login */}
         <Route path="/" element={<Navigate to="/login" replace />} />
 
@@ -40,14 +42,14 @@ function App() {
           </ProtectedRoute>
         } />
 
-         {/* Protected Routes */}
+        {/* Protected Routes */}
         <Route path="/admin-dashboard" element={
           <ProtectedRoute>
             <AdminDashboard />
           </ProtectedRoute>
         } />
 
-         {/* Protected Routes */}
+        {/* Protected Routes */}
         <Route path="/billing-dashboard" element={
           <ProtectedRoute>
             <BillingDashboard />
@@ -59,13 +61,13 @@ function App() {
             <StaffDashboard />
           </ProtectedRoute>
         } />
-      
+
         <Route path="/profile" element={
           <ProtectedRoute>
             <Profile />
           </ProtectedRoute>
         } />
-        
+
         <Route path="/medicines" element={
           <ProtectedRoute>
             <Medicines />
@@ -107,6 +109,24 @@ function App() {
             <Customers />
           </ProtectedRoute>
         } />
+
+        <Route
+          path="/new-sale"
+          element={
+            <ProtectedRoute>
+              <NewSales />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/sales-history"
+          element={
+            <ProtectedRoute>
+              <SalesHistory />
+            </ProtectedRoute>
+          }
+        />
 
         <Route path="/settings" element={
           <ProtectedRoute>

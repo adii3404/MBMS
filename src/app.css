@@ -108,6 +108,45 @@ body {
   color: white;
 }
 
+/* === FIX Billing Dashboard alignment === */
+.sidebar-parent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px;          /* SAME as sidebar links */
+  margin-bottom: 5px;     /* SAME as sidebar links */
+  border-radius: 4px;
+
+  color: #bdc3c7;
+  cursor: pointer;
+}
+
+/* Hover same as links */
+.sidebar-parent:hover {
+  background-color: #34495e;
+  color: white;
+}
+
+/* Active state same as links */
+.sidebar-parent.active {
+  background-color: #34495e;
+  color: white;
+}
+
+/* Child menu alignment */
+.sidebar-children {
+  margin-left: 0;         /* IMPORTANT */
+  padding-left: 20px;
+}
+
+/* Child links */
+.sidebar-children a {
+  padding: 10px 12px;
+  margin-bottom: 5px;
+}
+
+
 /* --- MAIN CONTENT --- */
 .main-content {
   flex-grow: 1;
@@ -401,4 +440,135 @@ th {
   text-align: center;
   color: #64748b;
   padding: 15px;
+}
+/* Billing parent with arrow */
+.sidebar-parent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Arrow icon */
+.arrow {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate when open */
+.arrow.open {
+  transform: rotate(180deg);
+}
+/* ============================= */
+/* BILLING – NEW SALE PAGE CSS  */
+/* ============================= */
+
+/* Page container */
+.medicine-page {
+  padding: 20px;
+  background-color: #f8fafc;
+}
+
+/* Page title */
+.medicine-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+/* Customer dropdown */
+.medicine-input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  width: 260px;
+  margin-bottom: 15px;
+  background-color: white;
+}
+
+/* Section headings */
+.medicine-page h4 {
+  margin: 15px 0 10px;
+  font-size: 16px;
+  color: #374151;
+}
+
+/* Medicine buttons */
+.medicine-page .btn-add {
+  background-color: #2563eb;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.medicine-page .btn-add:hover {
+  background-color: #1d4ed8;
+}
+
+.medicine-page .btn-add:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Billing table */
+.medicine-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  margin-top: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.medicine-table th {
+  background-color: #f1f5f9;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.medicine-table td {
+  padding: 12px;
+  font-size: 14px;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Empty cart */
+.empty-row {
+  text-align: center;
+  padding: 15px;
+  color: #64748b;
+}
+
+/* Totals section */
+.medicine-page p {
+  font-size: 15px;
+  margin: 4px 0;
+  color: #374151;
+}
+
+.medicine-page h3 {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #16a34a;
+}
+
+/* Save sale button */
+.medicine-page .btn-primary {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 15px;
+  border-radius: 4px;
+  background-color: #16a34a;
+  color: white;
+}
+
+.medicine-page .btn-primary:hover {
+  background-color: #15803d;
 }

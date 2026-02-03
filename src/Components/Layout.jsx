@@ -42,14 +42,18 @@ const Layout = ({ children }) => {
           {user && (user.role === 'admin' || user.role === 'staff') && (
             <>
               <div
-                className={`sidebar-parent ${
-                  isActive('/new-sale') || isActive('/sales-history')
-                    ? 'active'
-                    : ''
-                }`}
+                className={`sidebar-parent ${isActive("/new-sale") || isActive("/sales-history")
+                    ? "active"
+                    : ""
+                  }`}
                 onClick={() => setBillingOpen(!billingOpen)}
               >
-                Billing Dashboard
+                <span>Billing Dashboard</span>
+
+                {/* Arrow */}
+                <span className={`arrow ${billingOpen ? "open" : ""}`}>
+                  ▼
+                </span>
               </div>
 
               {billingOpen && (

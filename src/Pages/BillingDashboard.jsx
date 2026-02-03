@@ -4,7 +4,7 @@ import Layout from '../Components/Layout.jsx';
 const BillingDashboard = () => {
   return (
     <Layout>
-      <div style={{ padding: '20px' }}>
+      <div >
         <h2>Billing Dashboard</h2>
         <p>Select an option from the sidebar</p>
       </div>
