@@ -54,17 +54,22 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #e9ecef;
+  background-image: url('D:\MBMS\images\login.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .login-box {
-  background: white;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   width: 100%;
   max-width: 400px;
   text-align: center;
+
 }
 
 .login-box input {
@@ -74,6 +79,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 
 /* --- SIDEBAR --- */
 .sidebar {
