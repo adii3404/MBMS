@@ -572,3 +572,400 @@ th {
 .medicine-page .btn-primary:hover {
   background-color: #15803d;
 }
+
+/* ============================= */
+/* DEALER MODULE CSS             */
+/* ============================= */
+
+.dealer-page {
+  padding: 20px;
+  background-color: #f8fafc;
+}
+
+/* Page title */
+.dealer-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+/* Dealer form */
+.dealer-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+/* Inputs */
+.dealer-input {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  width: 180px;
+  font-size: 14px;
+}
+
+.dealer-address {
+  width: 260px;
+}
+
+/* Buttons (reuse your existing btn styles) */
+.btn-add {
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-update {
+  background-color: #16a34a;
+  color: white;
+}
+
+.btn-cancel {
+  background-color: #64748b;
+  color: white;
+}
+
+.btn-edit {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #ef4444;
+  color: white;
+  margin-left: 8px;
+}
+
+/* Dealer table */
+.dealer-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.dealer-table th,
+.dealer-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 14px;
+}
+
+.dealer-table th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Empty state */
+.empty-row {
+  text-align: center;
+  color: #64748b;
+  padding: 15px;
+}
+/* ============================= */
+/* PURCHASE PAGE (SEARCH BASED)  */
+/* ============================= */
+
+.purchase-page {
+  padding: 20px;
+  background-color: #f8fafc;
+  min-height: calc(100vh - 60px);
+}
+
+.purchase-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+/* Inputs & selects */
+.purchase-input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  width: 280px;
+  font-size: 14px;
+  background-color: #ffffff;
+  margin-bottom: 10px;
+}
+
+/* Section headings */
+.purchase-page h4 {
+  margin: 15px 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* Medicine search suggestions */
+.medicine-suggestions {
+  position: absolute;
+  width: 280px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+  z-index: 20;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.suggestion-item {
+  padding: 8px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background-color: #e5e7eb;
+}
+
+/* Buttons */
+.purchase-page .btn-add {
+  background-color: #2563eb;
+  color: white;
+  padding: 9px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.purchase-page .btn-add:hover {
+  background-color: #1d4ed8;
+}
+
+.purchase-page .btn-primary {
+  margin-top: 15px;
+  background-color: #16a34a;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.purchase-page .btn-primary:hover {
+  background-color: #15803d;
+}
+
+/* Purchase table */
+.purchase-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  margin-top: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.purchase-table th {
+  background-color: #f1f5f9;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  text-align: left;
+}
+
+.purchase-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+/* Table inputs */
+.purchase-table input {
+  width: 80px;
+  padding: 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+}
+
+/* Empty state */
+.empty-row {
+  text-align: center;
+  color: #64748b;
+  padding: 15px;
+}
+
+/* Totals */
+.purchase-totals {
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.purchase-totals p {
+  margin: 4px 0;
+}
+
+.purchase-totals h3 {
+  margin-top: 8px;
+  font-size: 20px;
+  color: #16a34a;
+  font-weight: 700;
+}
+
+/*profile page CSS*/
+.profile-page {
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.profile-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Card */
+.profile-card {
+  width: 100%;
+  max-width: 600px;   /* ⬅️ increase from 500px */
+  background: #27aa19;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+/* Avatar */
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Name + Role */
+.profile-info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.profile-role {
+  display: inline-block;
+  margin-top: 4px;
+  background: #eef2ff;
+  color: #4f46e5;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Fields */
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.profile-field label {
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.profile-field input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+}
+
+.change-password-page {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* center horizontally */
+}
+
+.change-password-title {
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Card */
+.change-password-card {
+  width: 100%;
+  max-width: 600px;     /* ⬅️ wide, professional size */
+  background: #27aa19;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Form */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.form-group input {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  font-size: 14px;
+}
+
+/* Button */
+.btn-primary {
+  margin-top: 10px;
+  padding: 12px;
+  width: 100%;
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #4338ca;
+}
