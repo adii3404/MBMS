@@ -4,8 +4,12 @@ import Layout from "../Components/Layout";
 const NewSale = () => {
   const [customers, setCustomers] = useState([]);
   const [medicines, setMedicines] = useState([]);
+
+  const [customerName, setCustomerName] = useState("");
+  const [medicineName, setMedicineName] = useState("");
+  const [qty, setQty] = useState(1);
+
   const [cart, setCart] = useState([]);
-  const [customerId, setCustomerId] = useState("");
 
   // Load customers & medicines
   useEffect(() => {
@@ -13,129 +17,146 @@ const NewSale = () => {
     setMedicines(JSON.parse(localStorage.getItem("medicines")) || []);
   }, []);
 
-  // Add medicine to cart
-  const addToCart = (med) => {
-    const exists = cart.find((i) => i.id === med.id);
-    if (exists) {
-      setCart(
-        cart.map((i) =>
-          i.id === med.id ? { ...i, qty: i.qty + 1 } : i
-        )
-      );
-    } else {
-      setCart([...cart, { ...med, qty: 1 }]);
+  // ===============================
+  // ADD MEDICINE TO CART (AUTO ADD)
+  // ===============================
+  const addToCart = () => {
+    if (!medicineName.trim() || qty <= 0) {
+      alert("Enter medicine name and quantity");
+      return;
     }
+
+    let meds = [...medicines];
+
+    // Try to find medicine
+    let med = meds.find(m =>
+      m.name.toLowerCase() === medicineName.toLowerCase()
+    );
+
+    // ❗ If medicine NOT FOUND → auto add to inventory
+    if (!med) {
+      med = {
+        id: Date.now(),
+        name: medicineName,
+        sellingPrice: 0,
+        gst: 0,
+        stock: 0
+      };
+
+      meds.push(med);
+      localStorage.setItem("medicines", JSON.stringify(meds));
+      setMedicines(meds);
+    }
+
+    // Prevent duplicate in cart
+    const exists = cart.find(c => c.id === med.id);
+    if (exists) {
+      alert("Medicine already added to cart");
+      return;
+    }
+
+    // Add to cart
+    setCart([
+      ...cart,
+      {
+        id: med.id,
+        name: med.name,
+        qty,
+        price: med.sellingPrice,
+        gst: med.gst
+      }
+    ]);
+
+    setMedicineName("");
+    setQty(1);
   };
 
-  // Calculate totals
-  const calculateTotals = () => {
-    let subTotal = 0;
-    let gstTotal = 0;
+  // ===============================
+  // TOTALS
+  // ===============================
+  const subTotal = cart.reduce((s, i) => s + i.qty * i.price, 0);
+  const gstTotal = cart.reduce(
+    (s, i) => s + (i.qty * i.price * i.gst) / 100,
+    0
+  );
+  const grandTotal = subTotal + gstTotal;
 
-    cart.forEach((item) => {
-      const itemTotal = item.qty * item.sellingPrice;
-      const gstAmount = (itemTotal * item.gst) / 100;
-
-      subTotal += itemTotal;
-      gstTotal += gstAmount;
-    });
-
-    return {
-      subTotal,
-      gstTotal,
-      grandTotal: subTotal + gstTotal,
-    };
-  };
-
-  // Save sale
-  const saveSale = () => {
-    if (!customerId || cart.length === 0) {
-      alert("Select customer and add medicines");
+  // ===============================
+  // SAVE BILL
+  // ===============================
+  const saveBill = () => {
+    if (!customerName.trim() || cart.length === 0) {
+      alert("Enter customer and add medicines");
       return;
     }
 
     const sales = JSON.parse(localStorage.getItem("sales")) || [];
-    const medicinesData =
-      JSON.parse(localStorage.getItem("medicines")) || [];
 
-    const invoiceCounter =
-      Number(localStorage.getItem("invoiceCounter")) || 1;
-
-    const totals = calculateTotals();
-
-    const newSale = {
-      invoiceNo: invoiceCounter,
-      customerId,
+    const bill = {
+      invoiceNo: "INV-" + Date.now(),
+      customer: customerName,
       items: cart,
-      ...totals,
-      date: new Date().toLocaleString(),
+      subTotal,
+      gstTotal,
+      grandTotal,
+      date: new Date().toLocaleString()
     };
 
-    // Reduce stock
-    const updatedMedicines = medicinesData.map((med) => {
-      const soldItem = cart.find((i) => i.id === med.id);
-      return soldItem
-        ? { ...med, stock: med.stock - soldItem.qty }
-        : med;
-    });
+    sales.push(bill);
+    localStorage.setItem("sales", JSON.stringify(sales));
 
-    // Save to LocalStorage
-    localStorage.setItem(
-      "sales",
-      JSON.stringify([newSale, ...sales])
-    );
-    localStorage.setItem(
-      "medicines",
-      JSON.stringify(updatedMedicines)
-    );
-    localStorage.setItem(
-      "invoiceCounter",
-      invoiceCounter + 1
-    );
+    alert("Bill saved successfully");
 
-    alert("Sale completed successfully");
     setCart([]);
-    setCustomerId("");
+    setCustomerName("");
   };
 
-  const totals = calculateTotals();
+  const printBill = () => {
+    window.print();
+  };
 
   return (
     <Layout>
-      <div className="medicine-page">
-        <h2 className="medicine-title">New Sale</h2>
+      <div className="sale-page">
+        <h2 className="sale-title">New Sale</h2>
 
-        {/* Select Customer */}
-        <select
-          className="medicine-input"
-          value={customerId}
-          onChange={(e) => setCustomerId(e.target.value)}
-        >
-          <option value="">Select Customer</option>
-          {customers.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.name}
-            </option>
+        {/* CUSTOMER */}
+        <input
+          className="sale-input"
+          placeholder="Enter Customer Name"
+          value={customerName}
+          onChange={e => setCustomerName(e.target.value)}
+          list="customerList"
+        />
+        <datalist id="customerList">
+          {customers.map(c => (
+            <option key={c.id} value={c.name} />
           ))}
-        </select>
+        </datalist>
 
-        {/* Medicines List */}
-        <h4 style={{ marginTop: 20 }}>Medicines</h4>
-        {medicines.map((m) => (
-          <button
-            key={m.id}
-            className="btn btn-add"
-            style={{ marginRight: 8, marginBottom: 8 }}
-            onClick={() => addToCart(m)}
-            disabled={m.stock <= 0}
-          >
-            {m.name} (Stock: {m.stock})
-          </button>
-        ))}
+        {/* MEDICINE */}
+        <h4>Add Medicine</h4>
+        <input
+          className="sale-input"
+          placeholder="Medicine name"
+          value={medicineName}
+          onChange={e => setMedicineName(e.target.value)}
+        />
 
-        {/* Cart */}
-        <h4 style={{ marginTop: 20 }}>Cart</h4>
-        <table className="medicine-table">
+        <input
+          type="number"
+          className="sale-input small"
+          value={qty}
+          onChange={e => setQty(Number(e.target.value))}
+        />
+
+        <button className="btn-add" onClick={addToCart}>
+          Add Medicine
+        </button>
+
+        {/* CART */}
+        <h4>Cart</h4>
+        <table className="sale-table">
           <thead>
             <tr>
               <th>Medicine</th>
@@ -153,41 +174,37 @@ const NewSale = () => {
                 </td>
               </tr>
             ) : (
-              cart.map((i) => {
-                const itemTotal = i.qty * i.sellingPrice;
-                const gstAmount =
-                  (itemTotal * i.gst) / 100;
-
-                return (
-                  <tr key={i.id}>
-                    <td>{i.name}</td>
-                    <td>{i.qty}</td>
-                    <td>₹ {i.sellingPrice}</td>
-                    <td>{i.gst}%</td>
-                    <td>
-                      ₹ {itemTotal + gstAmount}
-                    </td>
-                  </tr>
-                );
-              })
+              cart.map(c => (
+                <tr key={c.id}>
+                  <td>{c.name}</td>
+                  <td>{c.qty}</td>
+                  <td>₹ {c.price}</td>
+                  <td>{c.gst}%</td>
+                  <td>
+                    ₹ {c.qty * c.price + (c.qty * c.price * c.gst) / 100}
+                  </td>
+                </tr>
+              ))
             )}
           </tbody>
         </table>
 
-        {/* Totals */}
-        <div style={{ marginTop: 20 }}>
-          <p>Sub Total: ₹ {totals.subTotal}</p>
-          <p>GST Total: ₹ {totals.gstTotal}</p>
-          <h3>Grand Total: ₹ {totals.grandTotal}</h3>
+        {/* TOTALS */}
+        <div className="sale-totals">
+          <p>Sub Total: ₹ {subTotal}</p>
+          <p>GST Total: ₹ {gstTotal}</p>
+          <h3>Grand Total: ₹ {grandTotal}</h3>
         </div>
 
-        <button
-          className="btn btn-primary"
-          style={{ marginTop: 15 }}
-          onClick={saveSale}
-        >
-          Save Sale
-        </button>
+        {/* ACTIONS */}
+        <div className="sale-actions">
+          <button className="btn-primary" onClick={saveBill}>
+            Save Bill
+          </button>
+          <button className="btn-print" onClick={printBill}>
+            Print Bill
+          </button>
+        </div>
       </div>
     </Layout>
   );

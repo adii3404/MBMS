@@ -7,7 +7,8 @@
 }
 
 body {
-  background-color: #f4f6f9;
+  background-color: #f9f9f9;
+  background-image: blur (5px);
   color: #333;
 }
 
@@ -164,12 +165,12 @@ body {
 
 /* --- HEADER --- */
 .header {
-  background-color: #bee425;
+  background-color: #bf9c1f;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #f7f7f8;
 }
 
 .user-info {
@@ -196,7 +197,7 @@ body {
 }
 
 .card {
-  background: #ffffff;
+  background: #f3f0f0;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -218,7 +219,7 @@ body {
 }
 
 .dashboard-section {
-  background: white;
+  background: rgb(236, 233, 233);
   padding: 20px;
   border-radius: 8px;
 }
@@ -468,68 +469,75 @@ th {
 /* BILLING – NEW SALE PAGE CSS  */
 /* ============================= */
 
-/* Page container */
-.medicine-page {
-  padding: 20px;
+/* ===============================
+   NEW SALE PAGE (FINAL CSS)
+   =============================== */
+
+.sale-page {
+  padding: 24px;
   background-color: #f8fafc;
+  min-height: calc(100vh - 60px);
 }
 
 /* Page title */
-.medicine-title {
+.sale-title {
   font-size: 22px;
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   color: #1f2937;
 }
 
-/* Customer dropdown */
-.medicine-input {
-  padding: 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 4px;
-  width: 260px;
-  margin-bottom: 15px;
-  background-color: white;
-}
-
-/* Section headings */
-.medicine-page h4 {
-  margin: 15px 0 10px;
+/* Section heading */
+.sale-page h4 {
+  margin: 16px 0 10px;
   font-size: 16px;
-  color: #374151;
+  font-weight: 600;
+  color: #1f2937;
 }
 
-/* Medicine buttons */
-.medicine-page .btn-add {
-  background-color: #2563eb;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
+/* Inputs */
+.sale-input {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  width: 260px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   font-size: 14px;
-  margin-right: 8px;
-  margin-bottom: 8px;
+  background-color: #ffffff;
 }
 
-.medicine-page .btn-add:hover {
+.sale-input.small {
+  width: 90px;
+}
+
+/* Add medicine button */
+.btn-add {
+  padding: 10px 18px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-add:hover {
   background-color: #1d4ed8;
 }
 
-.medicine-page .btn-add:disabled {
-  background-color: #94a3b8;
-  cursor: not-allowed;
-}
-
-/* Billing table */
-.medicine-table {
+/* Cart table */
+.sale-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
-  margin-top: 10px;
-  border-radius: 6px;
+  background-color: #ffffff;
+  margin-top: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
-.medicine-table th {
+.sale-table th {
   background-color: #f1f5f9;
   padding: 12px;
   text-align: left;
@@ -538,45 +546,90 @@ th {
   color: #334155;
 }
 
-.medicine-table td {
+.sale-table td {
   padding: 12px;
-  font-size: 14px;
-  color: #1f2937;
   border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #334155;
 }
 
-/* Empty cart */
+/* Empty cart row */
 .empty-row {
   text-align: center;
-  padding: 15px;
   color: #64748b;
+  padding: 16px;
 }
 
 /* Totals section */
-.medicine-page p {
+.sale-totals {
+  margin-top: 16px;
   font-size: 15px;
-  margin: 4px 0;
-  color: #374151;
 }
 
-.medicine-page h3 {
-  margin-top: 10px;
+.sale-totals p {
+  margin: 4px 0;
+}
+
+.sale-totals h3 {
+  margin-top: 8px;
   font-size: 20px;
+  font-weight: 700;
   color: #16a34a;
 }
 
-/* Save sale button */
-.medicine-page .btn-primary {
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 15px;
-  border-radius: 4px;
-  background-color: #16a34a;
-  color: white;
+/* Action buttons */
+.sale-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
 }
 
-.medicine-page .btn-primary:hover {
+/* Save bill */
+.btn-primary {
+  padding: 12px 26px;
+  background-color: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
   background-color: #15803d;
+}
+
+/* Print bill */
+.btn-print {
+  padding: 12px 22px;
+  background-color: #0d6efd;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-print:hover {
+  background-color: #0b5ed7;
+}
+
+/* Print view */
+@media print {
+  .sidebar,
+  .header,
+  .btn-add,
+  .btn-primary,
+  .btn-print {
+    display: none !important;
+  }
+
+  .sale-page {
+    padding: 0;
+    background: #ffffff;
+  }
 }
 
 /* ============================= */
