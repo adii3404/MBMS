@@ -8,6 +8,8 @@ const NewSale = () => {
   const [customerName, setCustomerName] = useState("");
   const [medicineName, setMedicineName] = useState("");
   const [qty, setQty] = useState(1);
+  const [price, setPrice] = useState("");
+  const [gst, setGst] = useState("");
 
   const [cart, setCart] = useState([]);
 
@@ -18,57 +20,57 @@ const NewSale = () => {
   }, []);
 
   // ===============================
-  // ADD MEDICINE TO CART (AUTO ADD)
+  // ADD MEDICINE TO CART
   // ===============================
   const addToCart = () => {
-    if (!medicineName.trim() || qty <= 0) {
-      alert("Enter medicine name and quantity");
+    if (!medicineName || qty <= 0 || price <= 0) {
+      alert("Enter medicine name, quantity and price");
       return;
     }
 
     let meds = [...medicines];
 
-    // Try to find medicine
-    let med = meds.find(m =>
-      m.name.toLowerCase() === medicineName.toLowerCase()
+    // Find medicine
+    let med = meds.find(
+      (m) => m.name.toLowerCase() === medicineName.toLowerCase()
     );
 
-    // ❗ If medicine NOT FOUND → auto add to inventory
+    // Auto add medicine if not found
     if (!med) {
       med = {
         id: Date.now(),
         name: medicineName,
-        sellingPrice: 0,
-        gst: 0,
-        stock: 0
+        sellingPrice: Number(price),
+        gst: Number(gst) || 0,
+        stock: 0,
       };
-
       meds.push(med);
       localStorage.setItem("medicines", JSON.stringify(meds));
       setMedicines(meds);
     }
 
     // Prevent duplicate in cart
-    const exists = cart.find(c => c.id === med.id);
-    if (exists) {
-      alert("Medicine already added to cart");
+    if (cart.find((c) => c.id === med.id)) {
+      alert("Medicine already added");
       return;
     }
 
-    // Add to cart
     setCart([
       ...cart,
       {
         id: med.id,
         name: med.name,
-        qty,
-        price: med.sellingPrice,
-        gst: med.gst
-      }
+        qty: Number(qty),
+        price: Number(price),
+        gst: Number(gst) || 0,
+      },
     ]);
 
+    // Reset inputs
     setMedicineName("");
     setQty(1);
+    setPrice("");
+    setGst("");
   };
 
   // ===============================
@@ -85,24 +87,23 @@ const NewSale = () => {
   // SAVE BILL
   // ===============================
   const saveBill = () => {
-    if (!customerName.trim() || cart.length === 0) {
+    if (!customerName || cart.length === 0) {
       alert("Enter customer and add medicines");
       return;
     }
 
     const sales = JSON.parse(localStorage.getItem("sales")) || [];
 
-    const bill = {
+    sales.push({
       invoiceNo: "INV-" + Date.now(),
       customer: customerName,
       items: cart,
       subTotal,
       gstTotal,
       grandTotal,
-      date: new Date().toLocaleString()
-    };
+      date: new Date().toLocaleString(),
+    });
 
-    sales.push(bill);
     localStorage.setItem("sales", JSON.stringify(sales));
 
     alert("Bill saved successfully");
@@ -111,9 +112,7 @@ const NewSale = () => {
     setCustomerName("");
   };
 
-  const printBill = () => {
-    window.print();
-  };
+  const printBill = () => window.print();
 
   return (
     <Layout>
@@ -123,31 +122,49 @@ const NewSale = () => {
         {/* CUSTOMER */}
         <input
           className="sale-input"
-          placeholder="Enter Customer Name"
+          placeholder="Customer Name"
           value={customerName}
-          onChange={e => setCustomerName(e.target.value)}
+          onChange={(e) => setCustomerName(e.target.value)}
           list="customerList"
         />
         <datalist id="customerList">
-          {customers.map(c => (
+          {customers.map((c) => (
             <option key={c.id} value={c.name} />
           ))}
         </datalist>
 
-        {/* MEDICINE */}
+        {/* MEDICINE SECTION */}
         <h4>Add Medicine</h4>
+
         <input
           className="sale-input"
-          placeholder="Medicine name"
+          placeholder="Medicine Name"
           value={medicineName}
-          onChange={e => setMedicineName(e.target.value)}
+          onChange={(e) => setMedicineName(e.target.value)}
         />
 
         <input
           type="number"
           className="sale-input small"
+          placeholder="Qty"
           value={qty}
-          onChange={e => setQty(Number(e.target.value))}
+          onChange={(e) => setQty(e.target.value)}
+        />
+
+        <input
+          type="number"
+          className="sale-input small"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+
+        <input
+          type="number"
+          className="sale-input small"
+          placeholder="GST %"
+          value={gst}
+          onChange={(e) => setGst(e.target.value)}
         />
 
         <button className="btn-add" onClick={addToCart}>
@@ -174,7 +191,7 @@ const NewSale = () => {
                 </td>
               </tr>
             ) : (
-              cart.map(c => (
+              cart.map((c) => (
                 <tr key={c.id}>
                   <td>{c.name}</td>
                   <td>{c.qty}</td>
