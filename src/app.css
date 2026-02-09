@@ -1162,3 +1162,75 @@ th {
   color: #64748b;
   padding: 12px;
 }
+
+/* ===============================
+   SETTINGS MODULE
+   =============================== */
+
+.settings-page {
+  padding: 20px;
+  background-color: #f8fafc;
+  min-height: calc(100vh - 60px);
+}
+
+.settings-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+.settings-card {
+  background-color: #ffffff;
+  padding: 22px;
+  border-radius: 8px;
+  max-width: 650px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* Form groups */
+.settings-card .form-group {
+  margin-bottom: 15px;
+}
+
+.settings-card .form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.settings-card .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #ffffff;
+}
+
+/* Row layout for prefix & GST */
+.settings-card .form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.settings-card .form-row .form-group {
+  flex: 1;
+}
+
+/* Save button */
+.settings-card .btn-primary {
+  margin-top: 10px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .settings-card .form-row {
+    flex-direction: column;
+  }
+}

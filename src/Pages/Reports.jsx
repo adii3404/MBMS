@@ -8,7 +8,7 @@ const Reports = () => {
   const [selectedDate, setSelectedDate] = useState("");
 
   useEffect(() => {
-    setSales(JSON.parse(localStorage.getItem("sales")) || []);
+    setSales(JSON.parse(localStorage.getItem("saleshistory")) || []);
     setPurchases(JSON.parse(localStorage.getItem("purchases")) || []);
     setMedicines(JSON.parse(localStorage.getItem("medicines")) || []);
   }, []);
