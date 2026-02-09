@@ -1163,74 +1163,77 @@ th {
   padding: 12px;
 }
 
-/* ===============================
-   SETTINGS MODULE
-   =============================== */
-
+/* Page container */
 .settings-page {
-  padding: 20px;
-  background-color: #f8fafc;
-  min-height: calc(100vh - 60px);
+  background: #ffffff;
+  padding: 30px;
+  min-height: 100vh;
 }
 
-.settings-title {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #1f2937;
+/* Title */
+.settings-page h2 {
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
 }
 
-.settings-card {
-  background-color: #ffffff;
-  padding: 22px;
+/* Form card look */
+.settings-form {
+  background: #f9f9f9;
+  padding: 25px;
   border-radius: 8px;
-  max-width: 650px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  max-width: 550px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-/* Form groups */
-.settings-card .form-group {
-  margin-bottom: 15px;
-}
-
-.settings-card .form-group label {
+/* Label styling */
+.settings-form label {
   display: block;
   font-weight: 600;
   margin-bottom: 6px;
-  color: #374151;
+  color: #444;
 }
 
-.settings-card .form-group input {
+/* Inputs */
+.settings-form input,
+.settings-form textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  margin-bottom: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
   font-size: 14px;
-  background-color: #ffffff;
 }
 
-/* Row layout for prefix & GST */
-.settings-card .form-row {
-  display: flex;
-  gap: 15px;
+.settings-form textarea {
+  resize: none;
+  height: 80px;
 }
 
-.settings-card .form-row .form-group {
-  flex: 1;
+/* Focus effect */
+.settings-form input:focus,
+.settings-form textarea:focus {
+  border-color: #198754;
+  box-shadow: 0 0 0 2px rgba(25,135,84,0.15);
 }
 
 /* Save button */
-.settings-card .btn-primary {
-  margin-top: 10px;
-  padding: 12px 28px;
+.save-btn {
+  background: #198754;
+  color: white;
+  padding: 10px 26px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
   font-size: 15px;
   font-weight: 600;
-  border-radius: 6px;
+  transition: 0.2s ease;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .settings-card .form-row {
-    flex-direction: column;
-  }
+.save-btn:hover {
+  background: #157347;
+  transform: translateY(-1px);
 }

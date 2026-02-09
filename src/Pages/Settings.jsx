@@ -1,125 +1,97 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../Components/Layout";
+import React, { useState } from "react";
+import Layout from '../Components/Layout.jsx';
 
 const Settings = () => {
-  const [settings, setSettings] = useState({
+  const [form, setForm] = useState({
     storeName: "",
-    storeAddress: "",
+    address: "",
     gstNumber: "",
-    invoicePrefix: "INV",
-    defaultGst: 0,
+    invoicePrefix: "INV-",
+    defaultGst: "18",
   });
 
-  // Load settings
-  useEffect(() => {
-    const savedSettings = JSON.parse(
-      localStorage.getItem("settings")
-    );
-    if (savedSettings) {
-      setSettings(savedSettings);
-    }
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    // Initialize invoiceCounter if not exists
-    if (!localStorage.getItem("invoiceCounter")) {
-      localStorage.setItem("invoiceCounter", "0");
-    }
-  }, []);
-
-  // Save settings
-  const saveSettings = () => {
-    localStorage.setItem(
-      "settings",
-      JSON.stringify(settings)
-    );
-    alert("Settings saved successfully");
+  const handleSave = (e) => {
+    e.preventDefault();
+    console.log("Saved Settings:", form);
+    alert("Settings saved successfully!");
   };
 
   return (
     <Layout>
-      <div className="settings-page">
-        <h2 className="settings-title">Settings</h2>
+    <div className="settings-page">
+      <h2>Store Settings</h2>
 
-        <div className="settings-card">
-          <div className="form-group">
-            <label>Store Name</label>
-            <input
-              type="text"
-              value={settings.storeName}
-              onChange={(e) =>
-                setSettings({
-                  ...settings,
-                  storeName: e.target.value,
-                })
-              }
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Store Address</label>
-            <input
-              type="text"
-              value={settings.storeAddress}
-              onChange={(e) =>
-                setSettings({
-                  ...settings,
-                  storeAddress: e.target.value,
-                })
-              }
-            />
-          </div>
-
-          <div className="form-group">
-            <label>GST Number</label>
-            <input
-              type="text"
-              value={settings.gstNumber}
-              onChange={(e) =>
-                setSettings({
-                  ...settings,
-                  gstNumber: e.target.value,
-                })
-              }
-            />
-          </div>
-
-          <div className="form-row">
-            <div className="form-group">
-              <label>Invoice Prefix</label>
-              <input
-                type="text"
-                value={settings.invoicePrefix}
-                onChange={(e) =>
-                  setSettings({
-                    ...settings,
-                    invoicePrefix: e.target.value,
-                  })
-                }
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Default GST (%)</label>
-              <input
-                type="number"
-                value={settings.defaultGst}
-                onChange={(e) =>
-                  setSettings({
-                    ...settings,
-                    defaultGst: Number(e.target.value),
-                  })
-                }
-              />
-            </div>
-          </div>
-
-          <button
-            className="btn-primary"
-            onClick={saveSettings}
-          >
-            Save Settings
-          </button>
+      <form className="settings-form" onSubmit={handleSave}>
+        
+        <div className="form-group">
+          <label>Store Name</label>
+          <input
+            type="text"
+            name="storeName"
+            value={form.storeName}
+            onChange={handleChange}
+            placeholder="Enter store name"
+            required
+          />
         </div>
-      </div>
+
+        <div className="form-group">
+          <label>Store Address</label>
+          <textarea
+            name="address"
+            value={form.address}
+            onChange={handleChange}
+            placeholder="Enter full address"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>GST Number</label>
+          <input
+            type="text"
+            name="gstNumber"
+            value={form.gstNumber}
+            onChange={handleChange}
+            placeholder="Enter GST number"
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Invoice Prefix</label>
+          <input
+            type="text"
+            name="invoicePrefix"
+            value={form.invoicePrefix}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Default GST %</label>
+          <input
+            type="number"
+            name="defaultGst"
+            value={form.defaultGst}
+            onChange={handleChange}
+            min="0"
+            max="100"
+          />
+        </div>
+
+        <button type="submit" className="save-btn">
+          Save Settings
+        </button>
+
+      </form>
+    </div>
     </Layout>
   );
 };
