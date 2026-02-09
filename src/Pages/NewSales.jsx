@@ -228,3 +228,4 @@ const NewSale = () => {
 };
 
 export default NewSale;
+

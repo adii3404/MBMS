@@ -1032,3 +1032,133 @@ th {
 .btn-primary:hover {
   background: #4338ca;
 }
+
+/* ===============================
+   CREATIVE REPORTS DASHBOARD
+   =============================== */
+
+.reports-page {
+  padding: 20px;
+}
+
+.reports-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Date filter */
+.report-filter {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-filter input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}
+
+/* Summary cards */
+.report-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.report-card {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.report-card.summary h4 {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.report-card.summary p {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.profit {
+  color: #16a34a;
+}
+
+.loss {
+  color: #dc2626;
+}
+
+/* Graph */
+.graph-section {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.bar-graph {
+  display: flex;
+  gap: 40px;
+  align-items: flex-end;
+  height: 180px;
+  margin-top: 20px;
+}
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bar-fill {
+  width: 60px;
+  border-radius: 6px;
+}
+
+.bar-fill.sales {
+  background-color: #16a34a;
+}
+
+.bar-fill.purchase {
+  background-color: #2563eb;
+}
+
+.bar span {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* Tables */
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.report-table th,
+.report-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.report-table th {
+  background-color: #f1f5f9;
+  text-align: left;
+}
+
+.low-stock {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.empty-row {
+  text-align: center;
+  color: #64748b;
+  padding: 12px;
+}
